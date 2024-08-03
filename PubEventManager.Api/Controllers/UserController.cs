@@ -29,7 +29,7 @@ public class UserController : ControllerBase
             return BadRequest("Registration failed.");
         }
 
-        return Ok("User registered successfully.");
+        return Ok(new { message = "User registered successfully." });
     }
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginUserDto loginDto)

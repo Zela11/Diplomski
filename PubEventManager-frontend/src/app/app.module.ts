@@ -7,7 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';  // Dodaj ovu liniju
+import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';  // Dodaj ovu liniju
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';  // Dodaj ovu liniju
     AppComponent,
     HomeComponent,
     NavBarComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

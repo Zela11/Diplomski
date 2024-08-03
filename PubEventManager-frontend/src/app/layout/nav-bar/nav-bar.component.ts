@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user/user.service';
 export class NavBarComponent implements OnInit {
 
   isLoggedIn: boolean = false;
+  userId: number | null = null;
 
   constructor(private userService: UserService, private tokenStorage: TokenStorageService) {}
   ngOnInit(): void {
@@ -19,8 +20,10 @@ export class NavBarComponent implements OnInit {
 
 
   checkLoginStatus(): void {
-    const userId = this.tokenStorage.getUserId();
-    this.isLoggedIn = userId > 0;
+    this.userService.currentUser.subscribe(userId => {
+      this.isLoggedIn = !!userId;
+      this.userId = userId;
+    });
   }
 
   logout(): void {

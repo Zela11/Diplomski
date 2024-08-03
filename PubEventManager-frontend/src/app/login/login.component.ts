@@ -19,7 +19,7 @@ export class LoginComponent {
         response => {
           console.log('Token:', response.token);
           this.userService.handleLoginResponse(response);
-          this.router.navigate(['']);
+          this.router.navigate(['/home']);
         }, error => {
           console.error('Login error:', error);
         }
