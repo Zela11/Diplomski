@@ -26,9 +26,10 @@ public class UserRepository : IUserRepository
         await _context.SaveChangesAsync();
     }
 
-    public Task<User> GetByIdAsync(int id)
+    public async Task<User> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Users
+                        .FirstOrDefaultAsync(u => u.Id == id);
     }
 
     public async Task<User> GetUserByEmailAsync(string email)
