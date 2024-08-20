@@ -56,5 +56,22 @@ namespace PubEventManager.Application.Services
             if(password == storedPassword) {  return true; }
             return false;
         }
+        public async Task<RegisterUserDto> GetByIdAsync(int id)
+        {
+            var user = await _userRepository.GetByIdAsync(id);
+            if (user == null)
+            {
+                return null;
+            }
+
+            return new RegisterUserDto
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Password = user.Password,
+                UserType = (int)user.Type,
+            };
+        }
     }
 }

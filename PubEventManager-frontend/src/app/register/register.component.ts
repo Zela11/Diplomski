@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from '../services/user/user.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from '../shared/model/user';
 
 @Component({
   selector: 'app-register',
@@ -9,9 +10,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  email: string = '';
-  firstname: string = '';
-  lastname: string = '';
+  user: User = {
+    id: 0,
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    userType: 0,
+  }
   password: string = '';
   confirmPassword: string = '';
 
@@ -20,15 +26,14 @@ export class RegisterComponent {
 
   onRegister(form: NgForm): void {
     if (form.valid && this.password === this.confirmPassword) {
-      const { email, firstname, lastname, password } = this;
-      this.userService.register(email, firstname, lastname, password).subscribe(
+      this.user.password = this.password;
+      this.userService.register(this.user).subscribe(
         response => {
           console.log('Registration successful', response.message);
           this.router.navigate(['login']);
         },
         error => {
           console.error('Registration error', error);
-          // Prikazivanje poruke o grešci
         }
       );
     } else {

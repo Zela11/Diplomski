@@ -42,4 +42,12 @@ public class UserController : ControllerBase
 
         return Ok(new { Token = token, UserId = userId });
     }
+    [HttpGet("{id}")]
+    public async Task<ActionResult<RegisterUserDto>> GetUserById(int id)
+    {
+        var user = await _userService.GetByIdAsync(id);
+        if (user == null) return NotFound();
+
+        return Ok(user);
+    }
 }

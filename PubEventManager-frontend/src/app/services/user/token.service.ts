@@ -10,23 +10,23 @@ export class TokenStorageService {
     console.log("u token storageu");
     console.log(token);
     console.log(userId);
-    localStorage.removeItem(ACCESS_TOKEN);
-    localStorage.removeItem(USER);
-    localStorage.setItem(ACCESS_TOKEN, token);
-    localStorage.setItem(USER, userId.toString());
+    sessionStorage.removeItem(ACCESS_TOKEN);
+    sessionStorage.removeItem(USER);
+    sessionStorage.setItem(ACCESS_TOKEN, token);
+    sessionStorage.setItem(USER, userId.toString());
   }
 
   getToken(): string | null {
-    return localStorage.getItem(ACCESS_TOKEN);
+    return sessionStorage.getItem(ACCESS_TOKEN);
   }
 
   getUserId(): number {
-    const userIdString = localStorage.getItem(USER);
+    const userIdString = sessionStorage.getItem(USER);
     return userIdString ? parseInt(userIdString, 10) : 0;
   }
 
   clear(): void {
-    localStorage.removeItem(ACCESS_TOKEN);
-    localStorage.removeItem(USER);
+    sessionStorage.removeItem(ACCESS_TOKEN);
+    sessionStorage.removeItem(USER);
   }
 }
