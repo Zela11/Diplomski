@@ -2,31 +2,40 @@
 using Microsoft.AspNetCore.Mvc.Diagnostics;
 using PubEventManager.Application.Dtos;
 using PubEventManager.Application.IServices;
+using PubEventManager.Domain.Entities;
 
-namespace PubEventManager.Api.Controllers
+namespace PubEventManager.Api.Controllers;
+
+[ApiController]
+[Route("api/events")]
+public class EventController : ControllerBase
 {
-    public class EventController : ControllerBase
+    private readonly IEventService _eventService;
+    public EventController(IEventService eventService)
     {
-        private readonly IEventService _eventService;
-        public EventController(IEventService eventService)
-        {
-            _eventService = eventService;
-        }
-        [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] EventDto eventDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var result = await _eventService.AddEventAsync(eventDto);
-            if (!result)
-            {
-                return BadRequest("Adding failed.");
-            }
-
-            return Ok(new { message = "Event created successfully." });
-        }
+        _eventService = eventService;
     }
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] EventDto eventDto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var result = await _eventService.AddEventAsync(eventDto);
+        if (!result)
+        {
+            return BadRequest("Adding failed.");
+        }
+
+        return Ok(new { message = "Event created successfully." });
+    }
+    [HttpGet]
+    public async Task<ActionResult<List<Event>>> GetAll()
+    {
+        var events = await _eventService.GetAllAsync();
+        return Ok(events);
+    }
+
 }

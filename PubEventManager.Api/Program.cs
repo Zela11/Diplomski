@@ -14,8 +14,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddSingleton<ITokenService, TokenService>();
+
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
+
+builder.Services.AddScoped<ITableService, TableService>();
+builder.Services.AddScoped<ITableRepository, TableRepository>();
+
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
 
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));

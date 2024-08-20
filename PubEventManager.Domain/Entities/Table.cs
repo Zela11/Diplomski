@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace PubEventManager.Domain.Entities
 {
-    internal class Table
+    public class Table
     {
+        public int Id { get; set; }
+        public int Capacity { get; set; }
     }
 }

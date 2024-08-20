@@ -1,4 +1,5 @@
-﻿using PubEventManager.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using PubEventManager.Domain.Entities;
 using PubEventManager.Domain.IRepositories;
 using PubEventManager.Infrastructure.Data;
 using System;
@@ -21,6 +22,12 @@ namespace PubEventManager.Infrastructure.Repositories
         {
             if (newEvent != null) { await _context.Events.AddAsync(newEvent); }
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Event>> GetAllAsync()
+        {
+            return await _context.Events
+                .ToListAsync();
         }
     }
 }

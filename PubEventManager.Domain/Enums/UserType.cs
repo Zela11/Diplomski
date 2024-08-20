@@ -1,9 +1,9 @@
 ﻿
 public enum UserType
 {
-    Guest, 
+    Guest,
+    Manager,
     Server, 
-    Bartender,
-    Manager
+    Bartender
 }
 

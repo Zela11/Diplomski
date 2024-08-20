@@ -1,5 +1,4 @@
 ﻿using PubEventManager.Application.Dtos;
-using PubEventManager.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace PubEventManager.Application.IServices
 {
-    public interface IEventService
+    public interface IReservationService
     {
-        Task<bool> AddEventAsync(EventDto newEvent);
-        Task<List<Event>> GetAllAsync();
-
+        Task<bool> CreateReservation(ReservationDto reservationDto);
     }
 }

@@ -18,6 +18,8 @@ public class AppDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Event> Events { get; set; }
+    public DbSet<Table> Tables { get; set; }
+    public DbSet<Reservation> Reservations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -43,6 +45,30 @@ public class AppDbContext : DbContext
             entity.Property(e => e.Description).IsRequired().HasMaxLength(500);
             entity.Property(e => e.Date).IsRequired();
         });
+        modelBuilder.Entity<Table>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Capacity).IsRequired();
+        });
+        modelBuilder.Entity<Reservation>(entity =>
+        {
+            entity.HasKey(e => new { e.GuestId, e.EventId, e.TableId });
+            entity.Property(e => e.ArrivalTime).IsRequired(false);
 
+            entity.HasOne<Table>()
+                .WithMany()
+                .HasForeignKey(r => r.TableId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne<Event>()
+                .WithMany()
+                .HasForeignKey(r => r.EventId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne<User>()
+                .WithMany()
+                .HasForeignKey(r => r.GuestId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
     }
 }

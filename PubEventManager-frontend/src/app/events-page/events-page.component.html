@@ -1,0 +1,16 @@
+<div class="events-container">
+    <h1>Events</h1>
+    <h2>Upcoming Events</h2>
+    
+    <ul *ngIf="upcomingEvents && upcomingEvents.length > 0; else noEvents">
+      <li *ngFor="let event of upcomingEvents">
+        <strong>{{ event.name }}</strong> - {{ event.date | date: 'fullDate' }}
+        <p>{{ event.description }}</p>
+      </li>
+    </ul>
+  
+    <ng-template #noEvents>
+      <p>No upcoming events this week.</p>
+    </ng-template>
+  </div>
+  

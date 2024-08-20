@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PubEventManager.Domain.IRepositories;
-
-public interface IEventRepository
+namespace PubEventManager.Domain.IRepositories
 {
-    Task AddAsync(Event newEvent);
-    Task<List<Event>> GetAllAsync();
-
+    public interface IReservationRepository
+    {
+        Task AddAsync(Reservation reservation);
+    }
 }

@@ -29,5 +29,10 @@ namespace PubEventManager.Application.Services
             await _eventRepository.AddAsync(eventToAdd);
             return true;
         }
+
+        public async Task<List<Event>> GetAllAsync()
+        {
+            return await _eventRepository.GetAllAsync();
+        }
     }
 }
