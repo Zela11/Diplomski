@@ -10,5 +10,7 @@ namespace PubEventManager.Application.IServices
     public interface IReservationService
     {
         Task<bool> CreateReservation(ReservationDto reservationDto);
+        Task<IEnumerable<ReservationDto>> GetReservationsByEventId(int eventId); // Dodata metoda
+
     }
 }

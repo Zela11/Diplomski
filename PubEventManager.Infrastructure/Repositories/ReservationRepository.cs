@@ -1,4 +1,5 @@
-﻿using PubEventManager.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using PubEventManager.Domain.Entities;
 using PubEventManager.Domain.IRepositories;
 using PubEventManager.Infrastructure.Data;
 using System;
@@ -21,6 +22,13 @@ namespace PubEventManager.Infrastructure.Repositories
         {
             if(reservation != null) { await _context.Reservations.AddAsync(reservation); }
             await _context.SaveChangesAsync();  
+        }
+
+        public async Task<List<Reservation>> GetReservationsByEventId(int eventId)
+        {
+            return await _context.Reservations
+                    .Where(r => r.EventId == eventId)
+                    .ToListAsync();
         }
     }
 }

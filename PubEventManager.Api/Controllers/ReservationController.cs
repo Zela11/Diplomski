@@ -30,4 +30,10 @@ public class ReservationController : ControllerBase
 
         return Ok(new { message = "Reservation created successfully." });
     }
+    [HttpGet("event/{eventId}")]
+    public async Task<IActionResult> GetReservationsByEventId(int eventId)
+    {
+        var reservations = await _reservationService.GetReservationsByEventId(eventId);
+        return Ok(reservations);
+    }
 }

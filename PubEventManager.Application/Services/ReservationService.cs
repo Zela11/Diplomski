@@ -29,5 +29,19 @@ namespace PubEventManager.Application.Services
             await _reservationRepository.AddAsync(res);
             return true;
         }
+
+        public async Task<IEnumerable<ReservationDto>> GetReservationsByEventId(int eventId)
+        {
+            var reservations =  await _reservationRepository.GetReservationsByEventId(eventId);
+
+            return reservations.Select(r => new ReservationDto
+            {
+                GuestId = r.GuestId,
+                EventId = r.EventId,
+                TableId = r.TableId,
+                ArrivalTime = r.ArrivalTime
+            });
+
+        }
     }
 }

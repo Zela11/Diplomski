@@ -1,14 +1,50 @@
 <div class="event-details-container">
-    <h2>{{ event?.name }}</h2>
-    <p>{{ formatDateTime(event?.date) }}</p>
-    <p>{{ event?.description }}</p>
-    <button class="reserve-table-button" (click)="toggleReservation()">Reserve Table</button>
-  
-    <div *ngIf="showReservation" class="reservation-popup">
-      <div class="popup-content">
-        <button class="close-popup" (click)="toggleReservation()">×</button>
-        <h3>Pub Layout</h3>
-        <img src="assets/proba.jpeg" alt="Map of Pub" class="map-image" />    </div>
+  <h2>{{ event?.name }}</h2>
+  <p>{{ formatDateTime(event?.date) }}</p>
+  <p>{{ event?.description }}</p>
+  <button class="reserve-table-button" (click)="toggleReservation()">Reserve Table</button>
+</div>
+
+<div class="popup-overlay" [ngClass]="{'show': isReservationOpen}">
+  <div class="popup-content">
+    <button class="close-button" (click)="toggleReservation()">×</button>
+    <div class="popup-body">
+      <div class="image-container">
+        <img 
+          src="assets/maclarensHD.jpg" 
+          alt="Event Image" 
+          class="popup-image" 
+          usemap="#table-map"
+        >
+        <div *ngFor="let area of tableAreas" 
+             class="overlay" 
+             [ngStyle]="getOverlayStyle(area)">
+        </div>
+      </div>
+      <div class="info-container">
+        <h3>Choose Table</h3>
+        <div class="status-box">
+          <span class="green-box"></span>
+          <p>Selected</p>
+        </div>
+        <div class="status-box">
+          <span class="brown-box"></span>
+          <p>Available</p>
+        </div>
+        <div class="status-box">
+          <span class="red-box"></span>
+          <p>Reserved</p>
+        </div>
+        <button class="popup-reserve-button" (click)="reserveTable()">Reserve Now</button>
+      </div>
     </div>
+    <map name="table-map">
+      <area 
+        *ngFor="let area of tableAreas" 
+        [attr.shape]="area.shape" 
+        [attr.coords]="area.coords" 
+        (click)="selectArea(area.id)"
+      >
+    </map>
   </div>
-  
+</div>
