@@ -34,5 +34,21 @@ namespace PubEventManager.Application.Services
         {
             return await _eventRepository.GetAllAsync();
         }
+
+        public async Task<EventDto> GetByIdAsync(int id)
+        {
+            var foundEvent = await _eventRepository.GetByIdAsync(id);
+            if(foundEvent == null)
+            {
+                return null;
+            }
+            return new EventDto
+            {
+                Date = foundEvent.Date,
+                Name = foundEvent.Name,
+                ManagerId = foundEvent.ManagerId,
+                Description = foundEvent.Description,
+            };
+        }
     }
 }

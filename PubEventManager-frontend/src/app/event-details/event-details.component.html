@@ -1,0 +1,14 @@
+<div class="event-details-container">
+    <h2>{{ event?.name }}</h2>
+    <p>{{ formatDateTime(event?.date) }}</p>
+    <p>{{ event?.description }}</p>
+    <button class="reserve-table-button" (click)="toggleReservation()">Reserve Table</button>
+  
+    <div *ngIf="showReservation" class="reservation-popup">
+      <div class="popup-content">
+        <button class="close-popup" (click)="toggleReservation()">×</button>
+        <h3>Pub Layout</h3>
+        <img src="assets/proba.jpeg" alt="Map of Pub" class="map-image" />    </div>
+    </div>
+  </div>
+  

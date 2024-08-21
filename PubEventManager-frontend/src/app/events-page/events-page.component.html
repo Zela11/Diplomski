@@ -1,16 +1,29 @@
 <div class="events-container">
-    <h1>Events</h1>
-    <h2>Upcoming Events</h2>
-    
-    <ul *ngIf="upcomingEvents && upcomingEvents.length > 0; else noEvents">
-      <li *ngFor="let event of upcomingEvents">
-        <strong>{{ event.name }}</strong> - {{ event.date | date: 'fullDate' }}
-        <p>{{ event.description }}</p>
-      </li>
-    </ul>
-  
-    <ng-template #noEvents>
-      <p>No upcoming events this week.</p>
-    </ng-template>
+  <h1>Events</h1>
+
+  <div class="week-selector">
+    <label for="week">Select Week:</label>
+    <div class="week-input-container">
+      <input
+        type="week"
+        id="week"
+        [value]="selectedWeek"
+        (change)="onWeekChange($event)"
+        class="week-input"
+      />
+      <span class="calendar-icon"></span>
+    </div>
   </div>
-  
+
+  <h2>Upcoming Events</h2>
+
+  <ul *ngIf="upcomingEvents && upcomingEvents.length > 0; else noEvents">
+    <li *ngFor="let event of upcomingEvents">
+      <strong (click)="navigateToEvent(event)">{{ event.name }}</strong> - {{ event.date | date: 'fullDate' }}
+    </li>
+  </ul>
+
+  <ng-template #noEvents>
+    <p>No upcoming events for the selected week.</p>
+  </ng-template>
+</div>

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Diagnostics;
 using PubEventManager.Application.Dtos;
 using PubEventManager.Application.IServices;
+using PubEventManager.Application.Services;
 using PubEventManager.Domain.Entities;
 
 namespace PubEventManager.Api.Controllers;
@@ -36,6 +37,14 @@ public class EventController : ControllerBase
     {
         var events = await _eventService.GetAllAsync();
         return Ok(events);
+    }
+    [HttpGet("{id}")]
+    public async Task<ActionResult<EventDto>> GetEventById(int id)
+    {
+        var foundEvent = await _eventService.GetByIdAsync(id);
+        if (foundEvent == null) return NotFound();
+
+        return Ok(foundEvent);
     }
 
 }

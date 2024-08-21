@@ -29,5 +29,11 @@ namespace PubEventManager.Infrastructure.Repositories
             return await _context.Events
                 .ToListAsync();
         }
+
+        public async Task<Event> GetByIdAsync(int id)
+        {
+            return await _context.Events
+                        .FirstOrDefaultAsync(e => e.Id == id);
+        }
     }
 }

@@ -1,47 +1,92 @@
 .events-container {
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-  }
+  margin-top: 400px;
+  padding: 30px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto; 
+  text-align: center;
+  height: 100vh;
+
+}
+
+h1 {
+  font-size: 3rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 2.2rem;
+  color: #ff9800; /* Orange color */
+  margin-bottom: 20px;
+}
+
+.week-selector {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.week-selector label {
+  font-size: 1.2rem;
+  color: #333;
+  margin-right: 15px;
+}
+
+.week-selector input[type="week"] {
+  padding: 12px 15px;
+  font-size: 1.1rem;
+  border: 2px solid #ff9800;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 200px; /* Adjust width as needed */
   
-  h1 {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  h2 {
-    font-size: 2rem;
-    color: #666;
-    margin-bottom: 20px;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 15px;
-    margin-bottom: 10px;
-    transition: box-shadow 0.3s ease;
-  }
-  
-  li:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  li strong {
-    font-size: 1.2rem;
-    color: #000;
-  }
-  
-  li p {
-    font-size: 1rem;
-    color: #666;
-    margin-top: 5px;
-  }
-  
+}
+
+.week-selector input[type="week"]:focus {
+  border-color: #333;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: default; /* Postavite podrazumevani kursor */
+}
+
+li:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+li strong {
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+}
+
+li p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+.ng-template {
+  font-size: 1.1rem;
+  color: #666;
+}
