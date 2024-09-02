@@ -27,10 +27,11 @@ export class EventDetailsComponent implements OnInit {
     { id: 5, shape: 'circle', coords: '56,391,17' },
     { id: 6, shape: 'circle', coords: '399,343,17' },
     { id: 7, shape: 'circle', coords: '478,391,17' },
-
-
-
-   
+    { id: 8, shape: 'rect', coords: '59,209,63,32' },
+    /*
+    { id: 9, shape: 'rect', coords: '161,344,32,63' },
+    { id: 10, shape: 'rect', coords: '265,344,32,63' },
+    { id: 11, shape: 'rect', coords: '201,26,32,63' },*/
   ];
   toggleReservation() {
     this.isReservationOpen = !this.isReservationOpen;
@@ -113,16 +114,7 @@ export class EventDetailsComponent implements OnInit {
     this.selectedTableId = null; // Resetuje selektovani sto
     this.highlightedArea = null; // Resetuje obeleženi sto
   }
-  public handleImageClick(event: MouseEvent): void {
-    console.log("huh");
-    const target = event.target as HTMLImageElement;
-    const rect = target.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
 
-    console.log(`Clicked coordinates: (${x}, ${y})`);
-    // Handle click event logic if needed
-  }
 
   public selectArea(areaId: number): void {
     if (this.reservedTableIds.includes(areaId)) {
@@ -169,6 +161,18 @@ export class EventDetailsComponent implements OnInit {
         height: `${radius * 2}px`,
         left: `${x - radius}px`,
         top: `${y - radius}px`,
+        pointerEvents: 'none',
+      };
+    }
+    else if (area.shape === 'rect') {
+      const [centerX, centerY, width, height] = coords;
+      return {
+        position: 'absolute',
+        backgroundColor: backgroundColor,
+        width: `${width}px`,
+        height: `${height}px`,
+        left: `${centerX - (width / 2)}px`,
+        top: `${centerY - (height / 2)}px`,
         pointerEvents: 'none',
       };
     }

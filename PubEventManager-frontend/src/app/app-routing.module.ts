@@ -5,13 +5,15 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { EventsPageComponent } from './events-page/events-page.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
+import { ManagerProfileComponent } from './manager-profile/manager-profile.component';
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
-  {path: 'login' , component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'events', component: EventsPageComponent},
+  { path: 'home', component: HomeComponent},
+  { path: 'login' , component: LoginComponent},
+  { path: 'register', component: RegisterComponent},
+  { path: 'events', component: EventsPageComponent},
   { path: 'event-details/:id', component: EventDetailsComponent },
+  { path: 'manager-profile', component: ManagerProfileComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }, 
   { path: '**', redirectTo: '/home' } 
 ];

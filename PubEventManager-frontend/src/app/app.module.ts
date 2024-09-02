@@ -10,7 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { EventsPageComponent } from './events-page/events-page.component';
-import { EventDetailsComponent } from './event-details/event-details.component';  // Dodaj ovu liniju
+import { EventDetailsComponent } from './event-details/event-details.component';
+import { ManagerProfileComponent } from './manager-profile/manager-profile.component';
+import { EmployeeProfileComponent } from './employee-profile/employee-profile.component';  // Dodaj ovu liniju
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { EventDetailsComponent } from './event-details/event-details.component';
     LoginComponent,
     RegisterComponent,
     EventsPageComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    ManagerProfileComponent,
+    EmployeeProfileComponent
   ],
   imports: [
     BrowserModule,

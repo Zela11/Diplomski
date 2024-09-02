@@ -130,7 +130,9 @@ p {
   position: absolute;
   pointer-events: none;
 }
-
+.overlay:hover {
+  cursor: pointer;
+}
 /* Info container styling */
 .info-container {
   flex: 0 1 auto; /* Automatically adjust size based on content */

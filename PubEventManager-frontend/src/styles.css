@@ -2,6 +2,12 @@
 body {
     font-family: 'Poppins', sans-serif;
     margin-top: 60px; /* Adjust based on the height of your navbar */
+    /*
+    background-image: url('assets/background2.jpg');
+    background-size: cover; /* Pokriva celu stranicu 
+    background-repeat: no-repeat; /* Sprečava ponavljanje slike 
+    background-position: center bottom; /* Pozicionira sliku na vrhu ekrana 
+    background-attachment: fixed; /* Čini pozadinu statičnom pri skrolovanju */
   }
   
   /* Make the navbar fixed at the top */
@@ -12,5 +18,3 @@ body {
   width: 100%;
   z-index: 1000; /* Ensure it stays above other content */
 }
-
-

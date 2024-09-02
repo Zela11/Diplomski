@@ -1,0 +1,51 @@
+<div class="manager-profile-container">
+    <h2>Manager Profile</h2>
+    
+    <div class="user-info">
+      <h3>User Information</h3>
+      <p><strong>First Name:</strong> {{ currentUser?.firstName }}</p>
+      <p><strong>Last Name:</strong> {{ currentUser?.lastName }}</p>
+      <p><strong>Email:</strong> {{ currentUser?.email }}</p>
+    </div>
+  
+    <div class="register-employee">
+      <h3>Register New Employee</h3>
+      <form (ngSubmit)="onRegisterEmployee(registerEmployeeForm)" #registerEmployeeForm="ngForm">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" [(ngModel)]="newEmployee.email" required>
+          <div class="error-message" *ngIf="registerEmployeeForm.submitted && !newEmployee.email">Email is required.</div>
+        </div>
+        <div class="form-group">
+          <label for="firstname">First Name</label>
+          <input type="text" id="firstname" name="firstname" [(ngModel)]="newEmployee.firstName" required>
+          <div class="error-message" *ngIf="registerEmployeeForm.submitted && !newEmployee.firstName">First name is required.</div>
+        </div>
+        <div class="form-group">
+          <label for="lastname">Last Name</label>
+          <input type="text" id="lastname" name="lastname" [(ngModel)]="newEmployee.lastName" required>
+          <div class="error-message" *ngIf="registerEmployeeForm.submitted && !newEmployee.lastName">Last name is required.</div>
+        </div>
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select id="role" name="role" [(ngModel)]="newEmployee.userType" required>
+            <option [value]="2">Server</option>
+            <option [value]="3">Bartender</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" [(ngModel)]="password" required>
+          <div class="error-message" *ngIf="registerEmployeeForm.submitted && !password">Password is required.</div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword" required>
+          <div class="error-message" *ngIf="registerEmployeeForm.submitted && !confirmPassword">Please confirm your password.</div>
+          <div class="error-message" *ngIf="registerEmployeeForm.submitted && password !== confirmPassword">Passwords do not match.</div>
+        </div>
+        <button type="submit" class="submit-button">Register Employee</button>
+      </form>
+    </div>
+  </div>
+  

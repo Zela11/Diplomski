@@ -46,7 +46,7 @@ namespace PubEventManager.Application.Services
                 LastName = registerUserDto.LastName,
                 Email = registerUserDto.Email,
                 Password = registerUserDto.Password,
-                Type = UserType.Guest
+                Type = (UserType)registerUserDto.UserType
             };
             await _userRepository.AddAsync(user);
             return true;
