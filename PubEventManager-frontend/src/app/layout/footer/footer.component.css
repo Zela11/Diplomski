@@ -1,0 +1,10 @@
+.footer {
+    background-color: black; /* Tamna pozadina za footer */
+    color: #fff; /* Bele boje teksta */
+    padding: 1rem 0; /* Unutrašnji razmak */
+    text-align: center; /* Centrirano poravnanje teksta */
+    position: relative; /* Osigurava da footer bude na kraju stranice */
+    bottom: 0; /* Osigurava da footer bude na dnu stranice */
+    width: 100%;
+  }
+  

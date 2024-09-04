@@ -1,6 +1,6 @@
 /* General styles for the navbar */
 .navbar {
-  background-color: #333;
+  background-color: #000000;
   padding: 10px 20px;
   color: #fff;
   /*border-radius: 10px; /* Zaobljene ivice */
@@ -48,7 +48,7 @@
 }
 
 .navbar-button {
-  background-color: #ff9800;
+  background-color: #ff5e00;
   color: #fff;
   border: none;
   padding: 10px 15px;
@@ -62,5 +62,5 @@
 }
 
 .navbar-button:hover {
-  background-color: #e68900;
+  background-color: #c11a00;
 }

@@ -1,20 +1,63 @@
-/* You can add global styles to this file, and also import other style files */
+/* Globalne stilove */
 body {
-    font-family: 'Poppins', sans-serif;
-    margin-top: 60px; /* Adjust based on the height of your navbar */
-    /*
-    background-image: url('assets/background2.jpg');
-    background-size: cover; /* Pokriva celu stranicu 
-    background-repeat: no-repeat; /* Sprečava ponavljanje slike 
-    background-position: center bottom; /* Pozicionira sliku na vrhu ekrana 
-    background-attachment: fixed; /* Čini pozadinu statičnom pri skrolovanju */
-  }
+  font-family: 'Poppins', sans-serif;
+  margin: 0; /* Uklanja marginu oko tela */
+  padding: 0; /* Uklanja padding oko tela */
   
-  /* Make the navbar fixed at the top */
+  background-image: url('assets/background1.jpg');
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center bottom; 
+  background-attachment: fixed; 
+  position: relative; /* Omogućava pseudo-elementu da se pravilno postavi */
+  min-height: 100vh; /* Osigurava da se telo proteže do visine vidljivog dela stranice */
+}
+
+/* Pseudo-element za crni overlay preko pozadinske slike */
+body::before {
+  content: ""; /* Obavezan za prikaz pseudo-elementa */
+  position: absolute; /* Apsolutno pozicioniranje */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Crna boja sa 40% transparentnosti */
+  z-index: -1; /* Postavlja overlay iza sadržaja */
+}
+
+/* Fiksni navbar na vrhu */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000; /* Ensure it stays above other content */
+  z-index: 1000; /* Obezbeđuje da navbar bude iznad drugih sadržaja */
+  background-color: rgba(0, 0, 0, 0.8); /* Dodaje poluprozirnu pozadinu navbaru */
+  padding: 10px 20px; /* Dodaje malo prostora unutar navbar-a */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Dodaje senku za bolji vizuelni efekat */
+  color: #ffffff; /* Boja teksta u navbar-u */
+}
+
+/* Stilovi za footer */
+.footer {
+  background-color: #333; /* Tamna pozadina za footer */
+  color: #fff; /* Bele boje teksta */
+  padding: 1rem 0; /* Unutrašnji razmak */
+  text-align: center; /* Centrirano poravnanje teksta */
+  position: fixed; /* Fiksno pozicioniranje */
+  bottom: 0; /* Na dnu stranice */
+  width: 100%; /* Širina koja pokriva ceo ekran */
+  z-index: 1000; /* Obezbeđuje da footer bude iznad drugih sadržaja */
+}
+
+/* Osigurava da sadržaj popuni raspoloživi prostor */
+html, body {
+  height: 100%; /* Omogućava da footer bude na dnu stranice */
+  margin: 0;
+  padding: 0; /* Uklanja padding oko tela */
+}
+
+main {
+  margin-top: 60px; /* Uklanja prostor ispod navbar-a */
+  padding-bottom: 60px; /* Dodaje prostor za footer, omogućavajući da se vidi kada se skroluje */
 }

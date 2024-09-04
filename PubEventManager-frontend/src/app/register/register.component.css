@@ -1,76 +1,104 @@
+/* Globalne stilove za resetovanje defaultnih vrednosti */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Stil za register-container */
 .register-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f4f4f4;
-  margin-top: 10px;
+  height: 90vh;
+  background-color: 'transperent';
 }
 
+/* Stil za register-form */
 .register-form {
-  background: #fff;
-  padding: 2rem;
+  margin-top: 70px;
+  background: rgba(0, 0, 0, 0.9);
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
 }
 
+/* Stil za naslov forme */
 .form-title {
+  font-size: 1.5rem;
+  color: #ffffff;
   margin-bottom: 1rem;
   text-align: center;
 }
 
+/* Stil za form-group */
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
+/* Stil za labelu */
 .form-group label {
   display: block;
+  font-size: 0.875rem;
+  color: #ffffff;
   margin-bottom: 0.5rem;
 }
 
+/* Stil za input polja */
 .form-group input {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.75rem;
   border: 1px solid #ddd;
   border-radius: 4px;
-}
-
-.error-message {
-  color: red;
   font-size: 0.875rem;
-  margin-top: 0.25rem;
+  color: #333;
 }
 
+/* Stil za error-message */
+.error-message {
+  color: #e74c3c;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* Stil za submit dugme */
 .submit-button {
   width: 100%;
   padding: 0.75rem;
   border: none;
   border-radius: 4px;
-  background-color: #ff9800;  /* Promeni ovu boju prema potrebi */
-  color: #fff;
+  background-color: #ff2200;  /* Boja dugmeta */
+  color: #ffffff;
   font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
-  background-color: #e68900;  /* Promeni ovu boju prema potrebi */
+  background-color: #c11a00;  /* Boja dugmeta na hover */
 }
 
+/* Stil za link za prijavu */
 .login-link {
-  margin-top: 1rem;
   text-align: center;
+  margin-top: 1.5rem;
+}
+
+.login-link p {
+  font-size: 0.875rem;
+  color: #6b6969;
 }
 
 .login-link a {
-  color: #e68900;  /* Promeni ovu boju prema boji dugmeta */
+  color: #ff2200;  /* Boja linka */
   text-decoration: none;
-  font-size: 0.875rem;
 }
 
 .login-link a:hover {
   text-decoration: underline;
+  color: #c11a00;
   cursor: pointer;
-  color: #e68900;
 }

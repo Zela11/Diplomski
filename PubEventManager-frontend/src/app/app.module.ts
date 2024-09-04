@@ -12,7 +12,8 @@ import { RegisterComponent } from './register/register.component';
 import { EventsPageComponent } from './events-page/events-page.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { ManagerProfileComponent } from './manager-profile/manager-profile.component';
-import { EmployeeProfileComponent } from './employee-profile/employee-profile.component';  // Dodaj ovu liniju
+import { EmployeeProfileComponent } from './employee-profile/employee-profile.component';
+import { FooterComponent } from './layout/footer/footer.component';  // Dodaj ovu liniju
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { EmployeeProfileComponent } from './employee-profile/employee-profile.co
     EventsPageComponent,
     EventDetailsComponent,
     ManagerProfileComponent,
-    EmployeeProfileComponent
+    EmployeeProfileComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
