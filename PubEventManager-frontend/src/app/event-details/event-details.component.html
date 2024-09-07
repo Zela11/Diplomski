@@ -2,6 +2,40 @@
   <div class="event-details-content">
     <h2>{{ event?.name }}</h2>
     <p>{{ formatDateTime(event?.date) }}</p>
+    <div class="slider">
+      <div class="slides">
+        <input type="radio" name="radio-btn" id="radio1" checked> 
+        <input type="radio" name="radio-btn" id="radio2">
+        <input type="radio" name="radio-btn" id="radio3"> 
+        <input type="radio" name="radio-btn" id="radio4"> 
+        <div class="slide first"> 
+          <img src="assets/background2.jpg" alt="Background 2">
+        </div>
+        <div class="slide"> 
+          <img src="assets/inside.jpg" alt="Inside">
+        </div>
+        <div class="slide"> 
+          <img src="assets/background1.jpg" alt="Background 1">
+        </div>
+        <div class="slide"> 
+          <img src="assets/maclarensHD.jpg" alt="Maclarens HD">
+        </div>
+   
+        <div class="navigation-auto">
+          <div class="auto-btn1"></div>
+          <div class="auto-btn2"></div>
+          <div class="auto-btn3"></div>
+          <div class="auto-btn4"></div>
+        </div>
+
+      </div>
+      <div class="navigation-manual">
+        <label for="radio1" class="manual-btn"></label>
+        <label for="radio2" class="manual-btn"></label>
+        <label for="radio3" class="manual-btn"></label>
+        <label for="radio4" class="manual-btn"></label>
+      </div>
+    </div>
     <p>{{ event?.description }}</p>
     <button class="reserve-table-button" (click)="toggleReservation()">Choose Table</button>
   </div>
