@@ -5,6 +5,7 @@ import { User } from 'src/app/shared/model/user';
 import { NgForm } from '@angular/forms';
 import { EventModel } from '../shared/model/event';
 import { EventService } from '../services/event/event.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-manager-profile',

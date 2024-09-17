@@ -22,11 +22,16 @@ export class EventsPageComponent implements OnInit {
     const [startOfWeek, endOfWeek] = this.getWeekRange(this.selectedWeek);
 
     this.eventService.getEvents().subscribe(events => {
-      this.upcomingEvents = events.filter(event => {
-        const eventDate = new Date(event.date);
-        return eventDate >= startOfWeek && eventDate <= endOfWeek;
-      })
-      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); // Sortiranje po datumu
+      this.upcomingEvents = events
+        .map(event => ({
+          ...event,
+          image: 'assets/background1.jpg' // Assign default image
+        }))
+        .filter(event => {
+          const eventDate = new Date(event.date);
+          return eventDate >= startOfWeek && eventDate <= endOfWeek;
+        })
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); // Sort by date
     });
   }
 
@@ -61,6 +66,7 @@ export class EventsPageComponent implements OnInit {
     const days = Math.floor((date.getTime() - jan1.getTime()) / (24 * 60 * 60 * 1000));
     return Math.ceil((days + 1) / 7);
   }
+
   navigateToEvent(event: EventModel): void {
     this.router.navigate(['/event-details', event.id]);
   }

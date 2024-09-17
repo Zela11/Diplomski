@@ -4,4 +4,5 @@ export interface EventModel {
     description: string;
     date: Date;
     managerId: number;
+    image?: string; // Add an optional image property
 }
