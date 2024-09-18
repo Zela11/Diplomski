@@ -12,5 +12,5 @@ public interface IEventRepository
     Task AddAsync(Event newEvent);
     Task<List<Event>> GetAllAsync();
     Task<Event> GetByIdAsync(int id);
-
+    Task<Event> GetByDate(DateTime date);
 }

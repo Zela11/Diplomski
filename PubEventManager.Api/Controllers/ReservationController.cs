@@ -28,6 +28,9 @@ public class ReservationController : ControllerBase
             return BadRequest("Adding failed.");
         }
 
+        //await _emailService.SendReservationConfirmationEmail(reservationDto.GuestId);
+
+
         return Ok(new { message = "Reservation created successfully." });
     }
     [HttpGet("event/{eventId}")]

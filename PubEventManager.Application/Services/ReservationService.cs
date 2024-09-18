@@ -19,6 +19,13 @@ namespace PubEventManager.Application.Services
         }
         public async Task<bool> CreateReservation(ReservationDto reservationDto)
         {
+            var existingReservation = await _reservationRepository.GetReservationByGuestAndEventAsync(reservationDto.GuestId, reservationDto.EventId);
+            
+            if(existingReservation != null)
+            {
+                return false;
+            }
+            
             var res = new Reservation
             {
                 EventId = reservationDto.EventId,

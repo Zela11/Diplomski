@@ -24,6 +24,13 @@ namespace PubEventManager.Infrastructure.Repositories
             await _context.SaveChangesAsync();  
         }
 
+        public async Task<Reservation> GetReservationByGuestAndEventAsync(int guestId, int eventId)
+        {
+            return await _context.Reservations
+                        .FirstOrDefaultAsync(r => r.GuestId == guestId && r.EventId == eventId);
+
+        }
+
         public async Task<List<Reservation>> GetReservationsByEventId(int eventId)
         {
             return await _context.Reservations

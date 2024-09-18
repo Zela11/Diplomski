@@ -32,6 +32,9 @@ export class ManagerProfileComponent implements OnInit {
     date: new Date(),
     managerId: 0,
   }
+  showPopup: boolean = false;
+  showSecondPopup: boolean = false;
+
   constructor(
     private userService: UserService, 
     private tokenStorage: TokenStorageService,
@@ -43,6 +46,20 @@ export class ManagerProfileComponent implements OnInit {
     this.userService.getById(userId).subscribe(user => {
       this.currentUser = user;
     });
+  }
+  openPopup(): void {
+    this.showPopup = true;
+  }
+
+  closePopup(): void {
+    this.showPopup = false;
+  }
+  openSecondPopup(): void {
+    this.showSecondPopup = true;
+  }
+
+  closeSecondPopup(): void {
+    this.showSecondPopup = false;
   }
   onRegisterEmployee(form: NgForm): void {
     if (form.valid && this.password === this.confirmPassword) {

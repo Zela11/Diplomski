@@ -19,6 +19,11 @@ namespace PubEventManager.Application.Services
         }
         public async Task<bool> AddEventAsync(EventDto newEvent)
         {
+            var existingEvent = await _eventRepository.GetByDate(newEvent.Date);
+            if(existingEvent != null)
+            {
+                return false;
+            }
             var eventToAdd = new Event
             {
                 Name = newEvent.Name,

@@ -1,37 +1,116 @@
 <div class="manager-profile-container">
   <div class="home-content">
-
-    <!-- User Image Section -->
-    <div class="user-image" *ngIf="currentUser">
-      <img src="https://via.placeholder.com/150" alt="User Image">
-      <p> {{ currentUser.email }}</p>
-      <button>Update</button>
-    </div>
-    <div class="dividerr"></div> <!-- Divider added here -->
-    <!-- Personal Information Section -->
-    <div class="user-info" *ngIf="currentUser">
-      <h3>Personal Information</h3>
+    <div class="profile">
+      <!-- User Image Section -->
+      <div class="user-image" *ngIf="currentUser">
+        <img src="https://via.placeholder.com/150" alt="User Image">
+        <p> {{ currentUser.email }}</p>
+        <button>Update</button>
+      </div>
       <div class="divider"></div> <!-- Divider added here -->
-      <div class="info-fields">
-
-        <div class="field-group">
-          <p><strong>First Name:</strong> 
-            <input 
-              type="text" 
-              [(ngModel)]="currentUser.firstName" 
-              placeholder="Enter First Name"
-            >
-          </p>
-        </div>
-        <div class="field-group">
+      <!-- Personal Information Section -->
+      <div class="user-info" *ngIf="currentUser">
+        <h3>Personal Information</h3>
+        <div class="divider"></div> <!-- Divider added here -->
+        <div class="info-fields">
+          <div class="field-group">
+            <p><strong>First Name:</strong> 
+              <input 
+                type="text" 
+                [(ngModel)]="currentUser.firstName" 
+                placeholder="Enter First Name"
+              >
+            </p>
+          </div>
+          <div class="field-group">
             <p><strong>Last Name:</strong> 
-            <input 
-              type="text" 
-              [(ngModel)]="currentUser.lastName" 
-              placeholder="Enter Last Name"
-            >
-          </p>
+              <input 
+                type="text" 
+                [(ngModel)]="currentUser.lastName" 
+                placeholder="Enter Last Name"
+              >
+            </p>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Button to open the popup -->
+    <div class="open-popup-button">
+      <button (click)="openPopup()">Organize New Social Event</button>
+      <button (click)="openSecondPopup()">Register new employee</button>
+    </div>
+
+    <!-- Popup Section -->
+    <div class="popup" *ngIf="showPopup">
+      <div class="popup-content">
+        <h2>Organize New Social Event</h2>
+        <form>
+          <div class="field-group">
+            <label for="event-name">Event Name:</label>
+            <input type="text" id="event-name" placeholder="Enter Event Name">
+          </div>
+          <div class="field-group">
+            <label for="event-description">Description:</label>
+            <textarea id="event-description" placeholder="Enter Description"></textarea>
+          </div>
+          <div class="field-group">
+            <label for="event-image">Choose Image:</label>
+            <input type="file" id="event-image">
+          </div>
+          <div class="field-group">
+            <label for="event-date">Choose Date:</label>
+            <input type="date" id="event-date">
+          </div>
+          <div class="field-group">
+            <label for="event-time">Choose Time:</label>
+            <select id="event-time">
+              <option value="20:15">20:15</option>
+              <option value="20:30">20:30</option>
+              <option value="20:45">20:45</option>
+              <option value="21:00">21:00</option>
+              <!-- Add more time slots as needed -->
+            </select>
+          </div>
+          <button type="submit">Submit</button>
+          <button type="button" (click)="closePopup()">Close</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup" *ngIf="showSecondPopup">
+      <div class="popup-content">
+        <h2>Register New Employee</h2>
+        <form (ngSubmit)="onRegisterEmployee(employeeForm)" #employeeForm="ngForm">
+          <div class="field-group">
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" [(ngModel)]="newEmployee.firstName" name="firstName" placeholder="Enter First Name" required>
+          </div>
+          <div class="field-group">
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" [(ngModel)]="newEmployee.lastName" name="lastName" placeholder="Enter Last Name" required>
+          </div>
+          <div class="field-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" [(ngModel)]="newEmployee.email" name="email" placeholder="Enter Email" required>
+          </div>
+          <div class="field-group">
+            <label for="position">Position:</label>
+            <select id="position" [(ngModel)]="newEmployee.userType" name="userType" required>
+              <option value="2">Server</option>
+              <option value="3">Bartender</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter Password" required>
+          </div>
+          <div class="field-group">
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+          </div>
+          <button type="submit">Register</button>
+          <button type="button" (click)="closeSecondPopup()">Close</button>
+        </form>
       </div>
     </div>
   </div>

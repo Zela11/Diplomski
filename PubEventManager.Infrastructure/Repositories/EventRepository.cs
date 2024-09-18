@@ -30,6 +30,12 @@ namespace PubEventManager.Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Event> GetByDate(DateTime date)
+        {
+            return await _context.Events
+                    .FirstOrDefaultAsync(e => e.Date.Date == date.Date);
+        }
+
         public async Task<Event> GetByIdAsync(int id)
         {
             return await _context.Events

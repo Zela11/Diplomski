@@ -10,6 +10,7 @@ namespace PubEventManager.Domain.IRepositories
     public interface IReservationRepository
     {
         Task AddAsync(Reservation reservation);
-        Task<List<Reservation>> GetReservationsByEventId(int eventId); 
+        Task<List<Reservation>> GetReservationsByEventId(int eventId);
+        Task<Reservation> GetReservationByGuestAndEventAsync(int guestId, int eventId);
     }
 }
