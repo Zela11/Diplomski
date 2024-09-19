@@ -17,7 +17,7 @@ public class EventController : ControllerBase
         _eventService = eventService;
     }
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] EventDto eventDto)
+    public async Task<IActionResult> Create([FromForm] EventDto eventDto)
     {
         if (!ModelState.IsValid)
         {
@@ -39,7 +39,7 @@ public class EventController : ControllerBase
         return Ok(events);
     }
     [HttpGet("{id}")]
-    public async Task<ActionResult<EventDto>> GetEventById(int id)
+    public async Task<ActionResult<Event>> GetEventById(int id)
     {
         var foundEvent = await _eventService.GetByIdAsync(id);
         if (foundEvent == null) return NotFound();

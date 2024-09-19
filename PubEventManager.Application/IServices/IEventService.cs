@@ -12,6 +12,6 @@ namespace PubEventManager.Application.IServices
     {
         Task<bool> AddEventAsync(EventDto newEvent);
         Task<List<Event>> GetAllAsync();
-        Task<EventDto> GetByIdAsync(int id);
+        Task<Event> GetByIdAsync(int id);
     }
 }

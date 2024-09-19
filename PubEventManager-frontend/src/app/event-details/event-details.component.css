@@ -1,9 +1,11 @@
+/* isto  */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* isto  */
 .event-details-container {
   display: flex;
   justify-content: center;
@@ -12,59 +14,77 @@
   background-color: transparent;
   margin-bottom: 30px;
 }
-
+/* isto  */
 .event-details-content {
-  padding: 50px;
-  background: rgba(0, 0, 0, 0.9); /* Tamna pozadina */
+  margin-top: 20px;
+  padding: 15px;
+  padding-bottom: 20px;
+  background: rgba(0, 0, 0, 0.9);
   border: black solid 5px;
   border-radius: 8px;
   max-width: 1200px;
   text-align: center;
 }
+/* isto  */
 .event-details-content h2 {
   color: #ff5e00;
 }
+/* isto  */
 .event-details-content p {
   color: white;
 }
+/* isto  */
 .divider {
   margin: 20px 0;
   border: none;
-  border-top: 2px solid #ff5e00; /* Beli divider */
+  border-top: 2px solid #ff5e00;
 }
+/* isto  */
 .divider2 {
   margin-top: -10px;
   margin-bottom: 25px;
   border: none;
-  border-top: 2px solid #ff5e00; /* Beli divider */
+  border-top: 2px solid #ff5e00;
 }
 
+/* isto  */
 .columns {
   display: flex;
   justify-content: space-between;
-  gap: 20px; /* Razmak između kolona */
+  gap: 20px;
 }
-
-.event-info, .slider {
+/* isto  */
+.event-info {
   flex: 1;
   color: white;
-}
-.event-info {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Rasporedi elemente ravnomerno vertikalno */
-  align-items: center; /* Centriraj elemente horizontalno */
-  height: auto; /* Podesi da zauzima sav raspoloživi prostor u koloni */
+  justify-content: space-between;
+  align-items: center;
+  height: auto;
   padding: 20px;
-  font-size: 1.5rem; /* Povećaj font */
+  font-size: 1.5rem;
 }
 
 .event-info p, 
 .event-info button {
-  margin: 10px 0; /* Dodaj malo margine između elemenata */
+  margin: 10px 0;
 }
 
-/* Overlay for popup */
+.image-container1 {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0px 15px rgba(255, 94, 0, 0.6);
+
+}
+
+.event-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -130,7 +150,7 @@
 }
 
 /* Image container styling */
-.image-container {
+.image-container2 {
   position: relative;
   flex: 0 1 auto; /* Automatically adjust size based on content */
   width: 550px; /* Fixed width */
@@ -228,113 +248,6 @@
 .popup-reserve-button:hover {
   background-color: #e68900;
 }
-
-/* Stil za slider sa desne strane */
-.slider {
-  width: 580px; /* Manja širina */
-  height: 320px; /* Manja visina */
-  margin: 0 auto; /* Slider centriran */
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 15px;
-}
-
-.slides {
-  display: flex;
-  width: 400%;
-  height: 100%;
-}
-
-.slides input {
-  display: none;
-}
-
-.slide {
-  width: 25%;
-  transition: 2s;
-}
-
-.slide img {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-}
-
-.navigation-manual {
-  position: absolute;
-  width: 580px; /* Prilagođeno širini slidera */
-  margin-top: -20px; /* Smanjen razmak */
-  display: flex;
-  justify-content: center;
-}
-
-.manual-btn {
-  border: 2px solid #ff5e00;
-  padding: 5px; 
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 1s;
-}
-
-.manual-btn:not(:last-child) {
-  margin-right: 40px;
-}
-
-.manual-btn:hover {
-  background: #ff5e00;
-}
-
-#radio1:checked ~ .first {
-  margin-left: 0;
-}
-
-#radio2:checked ~ .first {
-  margin-left: -25%;
-}
-
-#radio3:checked ~ .first {
-  margin-left: -50%;
-}
-
-#radio4:checked ~ .first {
-  margin-left: -75%;
-}
-
-.navigation-auto {
-  position: absolute;
-  display: flex;
-  width: 580px; /* Prilagođeno širini slidera */
-  justify-content: center;
-  margin-top: 300px; /* Prilagođeno visini slidera */
-}
-
-.navigation-auto div {
-  border: 2px solid #ff5e00;
-  padding: 5px;
-  border-radius: 10px;
-  transition: 1s;
-}
-
-.navigation-auto div:not(:last-child) {
-  margin-right: 40px;
-}
-
-#radio1:checked ~ .navigation-auto .auto-btn1 {
-  background: #ff5e00;
-}
-
-#radio2:checked ~ .navigation-auto .auto-btn2 {
-  background: #ff5e00;
-}
-
-#radio3:checked ~ .navigation-auto .auto-btn3 {
-  background: #ff5e00;
-}
-
-#radio4:checked ~ .navigation-auto .auto-btn4 {
-  background: #ff5e00;
-}
-
 .reserve-table-button {
   margin-top: 20px;
   padding: 12px 25px;

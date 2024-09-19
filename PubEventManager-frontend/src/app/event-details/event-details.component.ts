@@ -60,6 +60,7 @@ export class EventDetailsComponent implements OnInit {
           event.date = new Date(event.date);
         }
         this.event = event;
+        console.log(this.event);
         console.log(this.formatDateTime(event.date));
         this.loadReservations(eventId);
       });

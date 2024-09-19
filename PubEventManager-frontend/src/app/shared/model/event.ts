@@ -4,5 +4,6 @@ export interface EventModel {
     description: string;
     date: Date;
     managerId: number;
-    image?: string; // Add an optional image property
+    image?: File;
+    imageSrc?: string; // Dodaj ovo za Base64 kodiranu sliku
 }

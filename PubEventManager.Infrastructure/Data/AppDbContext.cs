@@ -44,6 +44,7 @@ public class AppDbContext : DbContext
             entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
             entity.Property(e => e.Description).IsRequired().HasMaxLength(500);
             entity.Property(e => e.Date).IsRequired();
+            entity.Property(e => e.Image).HasColumnType("bytea");
         });
         modelBuilder.Entity<Table>(entity =>
         {

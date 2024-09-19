@@ -2,29 +2,25 @@
   <div class="events-container">
     <div class="events-header">
       <h1 class="title">Events</h1>
-      <div class="week-selector">
-        <label for="week">Select Week:</label>
-        <div class="week-input-container">
-          <input
-            type="week"
-            id="week"
-            [value]="selectedWeek"
-            (change)="onWeekChange($event)"
-            class="week-input"
-          />
-          <span class="calendar-icon"></span>
-        </div>
-      </div>
     </div>
-    <div class="divider"></div> <!-- Divider added here -->
-    <div class="event-cards">
-      <div class="event-card" *ngFor="let event of upcomingEvents" (click)="navigateToEvent(event)">
-        <img class="event-card-image" [src]="event.image" alt="{{ event.name }}">
-        <div class="event-card-content">
-          <h2 class="event-card-title">{{ event.name }}</h2>
-          <p class="event-card-date">{{ event.date | date:'fullDate' }}</p>
+    <div class="divider"></div>
+    <div class="events-wrapper">
+      <button class="arrow-button prev" (click)="prevPage()" [disabled]="currentPage === 0">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div class="event-cards">
+        <!-- Iterate over the currentEvents to display only three events at a time -->
+        <div *ngFor="let event of currentEvents" class="event-card" (click)="navigateToEvent(event)">
+          <img class="event-card-image" *ngIf="event.imageSrc" [src]="event.imageSrc" alt="Event Image">
+          <div class="event-card-content">
+            <h2 class="event-card-title">{{ event.name }}</h2>
+            <p class="event-card-date">{{ event.date | date:'fullDate' }}</p>
+          </div>
         </div>
       </div>
+      <button class="arrow-button next" (click)="nextPage()" [disabled]="currentPage >= (totalPages - 1)">
+        <i class="fas fa-chevron-right"></i>
+      </button>
     </div>
   </div>
 </div>

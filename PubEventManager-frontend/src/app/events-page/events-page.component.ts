@@ -10,62 +10,41 @@ import { Router } from '@angular/router';
 })
 export class EventsPageComponent implements OnInit {
   public upcomingEvents: EventModel[] = [];
-  public selectedWeek: string = this.getCurrentWeek();
-
+  currentPage = 0;
+  itemsPerPage = 3;
+  totalPages: number = 0; // Initialize with a default value
   constructor(private eventService: EventService, private router: Router) {}
-
+  get currentEvents() {
+    const start = this.currentPage * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.upcomingEvents.slice(start, end);
+  }
   ngOnInit(): void {
     this.loadUpcomingEvents();
+
+  }
+  nextPage() {
+      if (this.currentPage < this.totalPages - 1) {
+        this.currentPage++;
+      }
   }
 
-  loadUpcomingEvents(): void {
-    const [startOfWeek, endOfWeek] = this.getWeekRange(this.selectedWeek);
-
-    this.eventService.getEvents().subscribe(events => {
-      this.upcomingEvents = events
-        .map(event => ({
-          ...event,
-          image: 'assets/background1.jpg' // Assign default image
-        }))
-        .filter(event => {
-          const eventDate = new Date(event.date);
-          return eventDate >= startOfWeek && eventDate <= endOfWeek;
-        })
-        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); // Sort by date
-    });
-  }
-
-  onWeekChange(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    if (inputElement) {
-      this.selectedWeek = inputElement.value;
-      this.loadUpcomingEvents();
+  prevPage() {
+    if (this.currentPage > 0) {
+      this.currentPage--;
     }
   }
+  loadUpcomingEvents(): void {
 
-  private getCurrentWeek(): string {
-    const today = new Date();
-    return `${today.getFullYear()}-W${this.getWeekNumber(today)}`;
+    this.eventService.getEvents().subscribe(events => {
+      this.upcomingEvents = events;
+      console.log(this.upcomingEvents);
+      console.log("duzina", this.upcomingEvents.length);
+      this.totalPages = Math.ceil(this.upcomingEvents.length / this.itemsPerPage);
+    });
+  
   }
-
-  private getWeekRange(week: string): [Date, Date] {
-    const [year, weekNumber] = week.split('-W').map(Number);
-    const startOfWeek = this.getDateFromISOWeek(year, weekNumber, 1);
-    const endOfWeek = new Date(startOfWeek);
-    endOfWeek.setDate(startOfWeek.getDate() + 6);
-    return [startOfWeek, endOfWeek];
-  }
-
-  private getDateFromISOWeek(year: number, week: number, day: number): Date {
-    const simpleDate = new Date(year, 0, 1 + (week - 1) * 7 + (day - 1));
-    return new Date(simpleDate.setDate(simpleDate.getDate() - simpleDate.getDay() + 1));
-  }
-
-  private getWeekNumber(date: Date): number {
-    const jan1 = new Date(date.getFullYear(), 0, 1);
-    const days = Math.floor((date.getTime() - jan1.getTime()) / (24 * 60 * 60 * 1000));
-    return Math.ceil((days + 1) / 7);
-  }
+ 
 
   navigateToEvent(event: EventModel): void {
     this.router.navigate(['/event-details', event.id]);

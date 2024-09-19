@@ -63,7 +63,7 @@
           <div class="column2">
             <div class="field-group">
               <label for="event-image">Choose Image:</label>
-              <input type="file" id="event-image">
+              <input type="file" id="event-image" (change)="onFileSelected($event)"> <!-- Dodaj change event -->
             </div>
             <div class="field-group">
               <label for="event-date">Choose Date:</label>

@@ -60,7 +60,14 @@ export class ManagerProfileComponent implements OnInit {
   openSecondPopup(): void {
     this.showSecondPopup = true;
   }
-
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];  // Preuzmi prvu izabranu datoteku
+    if (file) {
+      this.newEvent.image = file;  // Sačuvaj datoteku u modelu
+    }
+    console.log(this.newEvent.image);
+  }
+  
   closeSecondPopup(): void {
     this.showSecondPopup = false;
   }
@@ -95,8 +102,22 @@ export class ManagerProfileComponent implements OnInit {
   
       const formattedDate = this.getFormattedDateForBackend(this.newEvent.date);
       this.newEvent.date = new Date(formattedDate);
-  
-      this.eventService.createEvent(this.newEvent).subscribe(
+
+          // Kreiranje FormData objekta
+    const formData = new FormData();
+    formData.append('name', this.newEvent.name);
+    formData.append('description', this.newEvent.description);
+    formData.append('date', this.newEvent.date.toISOString());
+    formData.append('managerId', this.newEvent.managerId.toString());
+
+    // Ako je slika izabrana, dodaj je u formData
+    if (this.newEvent.image) {
+      formData.append('image', this.newEvent.image); // Pretpostavljam da je slika sačuvana u `newEvent.image`
+    }
+
+      console.log(this.newEvent);
+      console.log("Pre poziva eventService");
+      this.eventService.createEvent(formData).subscribe(
         (response) => {
           console.log("Successfully created new event", response);
           form.reset();

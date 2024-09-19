@@ -24,12 +24,22 @@ namespace PubEventManager.Application.Services
             {
                 return false;
             }
+            byte[] imageData = null;
+            if (newEvent.Image != null && newEvent.Image.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await newEvent.Image.CopyToAsync(memoryStream);
+                    imageData = memoryStream.ToArray(); // Pretvaranje slike u byte[]
+                }
+            }
             var eventToAdd = new Event
             {
                 Name = newEvent.Name,
                 Description = newEvent.Description,
                 ManagerId = newEvent.ManagerId,
                 Date = newEvent.Date,
+                Image = imageData,
             };
             await _eventRepository.AddAsync(eventToAdd);
             return true;
@@ -37,23 +47,33 @@ namespace PubEventManager.Application.Services
 
         public async Task<List<Event>> GetAllAsync()
         {
-            return await _eventRepository.GetAllAsync();
+            var events = await _eventRepository.GetAllAsync(); // Pretpostavljam da uzimaš događaje iz repozitorijuma
+
+            foreach (var evt in events)
+            {
+                if (evt.Image != null)
+                {
+                    evt.ImageSrc = $"data:image/jpeg;base64,{Convert.ToBase64String(evt.Image)}"; // Dodaj Base64 string
+                }
+            }
+
+            return events;
         }
 
-        public async Task<EventDto> GetByIdAsync(int id)
+
+        public async Task<Event> GetByIdAsync(int id)
         {
             var foundEvent = await _eventRepository.GetByIdAsync(id);
             if(foundEvent == null)
             {
                 return null;
             }
-            return new EventDto
+            if (foundEvent.Image != null)
             {
-                Date = foundEvent.Date,
-                Name = foundEvent.Name,
-                ManagerId = foundEvent.ManagerId,
-                Description = foundEvent.Description,
-            };
+                foundEvent.ImageSrc = $"data:image/jpeg;base64,{Convert.ToBase64String(foundEvent.Image)}"; // Dodaj Base64 string
+            }
+            return foundEvent;
+            
         }
     }
 }
