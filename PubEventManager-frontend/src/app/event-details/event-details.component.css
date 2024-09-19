@@ -259,3 +259,14 @@
   font-size: 16px;
   transition: background-color 0.3s ease;
 }
+.generate-pdf-button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  background-color: #ff5e00;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}

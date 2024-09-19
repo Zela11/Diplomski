@@ -21,7 +21,6 @@ export class EventsPageComponent implements OnInit {
   }
   ngOnInit(): void {
     this.loadUpcomingEvents();
-
   }
   nextPage() {
       if (this.currentPage < this.totalPages - 1) {

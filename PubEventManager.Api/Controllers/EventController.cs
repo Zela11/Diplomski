@@ -46,5 +46,17 @@ public class EventController : ControllerBase
 
         return Ok(foundEvent);
     }
+    [HttpGet("{id}/report")]
+    public async Task<IActionResult> GenerateEventReport(int id)
+    {
+        var pdfStream = await _eventService.GenerateEventReportAsync(id);
+
+        if (pdfStream == null)
+        {
+            return NotFound("Event not found or no reservations.");
+        }
+
+        return File(pdfStream.ToArray(), "application/pdf", "EventReport.pdf");
+    }
 
 }

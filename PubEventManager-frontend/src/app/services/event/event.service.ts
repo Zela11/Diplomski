@@ -21,4 +21,8 @@ export class EventService {
   createEvent(formData: FormData): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}`, formData);
   }
+  generateEventReport(eventId: number) {
+    const url = `${this.apiUrl}/${eventId}/report`;
+    return this.http.get(url, { responseType: 'blob' });  // Vrati PDF kao blob
+  }
 }

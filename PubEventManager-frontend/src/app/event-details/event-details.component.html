@@ -6,7 +6,8 @@
     <div class="columns">
       <div class="event-info">
         <p>{{ event?.description }}</p>
-        <button class="reserve-table-button" (click)="toggleReservation()">Choose Table</button>
+        <button *ngIf="userType === 0" class="reserve-table-button" (click)="toggleReservation()">Choose Table</button>
+        <button *ngIf="userType !== 0" class="generate-pdf-button" (click)="generatePdf()">Generate PDF</button>
       </div>
       <div class="image-container1">
         <img *ngIf="event?.imageSrc" [src]="event?.imageSrc" alt="Event Image" class="event-image">

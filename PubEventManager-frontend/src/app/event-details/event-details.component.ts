@@ -5,6 +5,9 @@ import { EventService } from '../services/event/event.service';
 import { Reservation } from '../shared/model/reservation';
 import { TokenStorageService } from '../services/user/token.service';
 import { ReservationService } from '../services/reservation/reservation.service';
+import { UserService } from '../services/user/user.service';
+import { User } from '../shared/model/user';
+import { saveAs } from 'file-saver'
 
 @Component({
   selector: 'app-event-details',
@@ -12,6 +15,8 @@ import { ReservationService } from '../services/reservation/reservation.service'
   styleUrls: ['./event-details.component.css']
 })
 export class EventDetailsComponent implements OnInit {
+  currentUser: User | null = null;
+  public userType: number = 0; // Pretpostavka za default userType, zameni stvarnim izvorom
   public event: EventModel | undefined;
   isReservationOpen: boolean = false;
   selectedTableId: number | null = null;
@@ -44,11 +49,35 @@ export class EventDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private eventService: EventService,
     private tokenStorage: TokenStorageService,
-    private reservationService: ReservationService
+    private reservationService: ReservationService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
     this.loadEventDetails();
+    this.loadUser();
+  }
+  loadUser() {
+    const userId = this.tokenStorage.getUserId();
+    this.userService.getById(userId).subscribe(user => {
+      this.currentUser = user;
+      console.log(this.currentUser);
+      this.userType = this.currentUser?.userType;
+    });
+
+  }
+  generatePdf(): void {
+    if (this.eventId) {
+      this.eventService.generateEventReport(this.eventId).subscribe({
+        next: (response) => {
+          const blob = new Blob([response], { type: 'application/pdf' });
+          saveAs(blob, 'EventReport.pdf');  // Sačuvaj fajl lokalno
+        },
+        error: (error) => {
+          alert('Error generating PDF: ' + error.message);
+        }
+      });
+    }
   }
   private loadEventDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
