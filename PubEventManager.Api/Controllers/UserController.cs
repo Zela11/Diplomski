@@ -31,6 +31,22 @@ public class UserController : ControllerBase
 
         return Ok(new { message = "User registered successfully." });
     }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateUser(int id, [FromBody] RegisterUserDto updatedUserDto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var result = await _userService.UpdateUserAsync(id, updatedUserDto);
+        if (!result)
+        {
+            return NotFound("User not found.");
+        }
+
+        return Ok(new { message = "User updated successfully." });
+    }
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginUserDto loginDto)
     {

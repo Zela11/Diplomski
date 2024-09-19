@@ -6,6 +6,8 @@ import { NgForm } from '@angular/forms';
 import { EventModel } from '../shared/model/event';
 import { EventService } from '../services/event/event.service';
 import { FormsModule } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http'; // Import za rad sa greškama HTTP zahteva
+
 
 @Component({
   selector: 'app-manager-profile',
@@ -13,7 +15,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./manager-profile.component.css']
 })
 export class ManagerProfileComponent implements OnInit {
-
+  isEditing: boolean = false; 
   currentUser: User | null = null;
   newEmployee: User = {
     id: 0,
@@ -25,6 +27,7 @@ export class ManagerProfileComponent implements OnInit {
   };
   password: string = '';
   confirmPassword: string = '';
+  eventTime: string = '';  // Dodajemo varijablu za čuvanje izabranog vremena
   newEvent: EventModel = {
     id: 0,
     name: '',
@@ -77,26 +80,56 @@ export class ManagerProfileComponent implements OnInit {
       console.log('Form is invalid or passwords do not match');
     }
   }
+
   onCreateEvent(form: NgForm): void {
-    if(form.valid) {
+    if (form.valid) {
       this.newEvent.managerId = this.tokenStorage.getUserId();
+  
       if (!(this.newEvent.date instanceof Date)) {
         this.newEvent.date = new Date(this.newEvent.date);
       }
   
+      if (this.newEvent.date && this.eventTime) {
+        this.newEvent.date = this.combineDateAndTime(this.newEvent.date, this.eventTime);
+      }
+  
       const formattedDate = this.getFormattedDateForBackend(this.newEvent.date);
-      this.newEvent.date =  new Date(formattedDate);
+      this.newEvent.date = new Date(formattedDate);
+  
       this.eventService.createEvent(this.newEvent).subscribe(
         (response) => {
           console.log("Successfully created new event", response);
           form.reset();
+        },
+        (error: HttpErrorResponse) => {
+          if (error.status === 400) {
+            alert('An event already exists on the selected day. Please choose different date.');
+          } else {
+            console.error('An error occurred:', error);
+          }
         }
       );
     } else {
       console.log('Form is invalid');
-
     }
   }
+  toggleEdit(): void {
+    if (this.isEditing && this.currentUser) {
+      this.userService.update( this.tokenStorage.getUserId(), this.currentUser).subscribe(
+        (response) => {
+          console.log('User updated successfully', response);
+          this.isEditing = false; // Zaključavamo polja ponovo
+        },
+        (error) => {
+          console.error('Error updating user', error);
+        }
+      );
+    } else {
+      // Ako nije u modu uređivanja, omogućavamo uređivanje
+      this.isEditing = true;
+    }
+  }
+  
   private getFormattedDateForBackend(date: Date): string {
     const padZero = (num: number): string => (num < 10 ? '0' : '') + num;
   
@@ -115,6 +148,12 @@ export class ManagerProfileComponent implements OnInit {
   
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}${sign}${hoursOffset}:${minutesOffset}`;
   }
-  
+   private combineDateAndTime(date: Date, time: string): Date {
+    const [hours, minutes] = time.split(':').map(Number); // Razdvojimo sate i minute
+    const newDate = new Date(date);
+
+    newDate.setHours(hours, minutes, 0, 0); // Dodamo vreme na datum
+    return newDate;
+  }
   
 }

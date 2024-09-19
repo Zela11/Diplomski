@@ -5,7 +5,7 @@
       <div class="user-image" *ngIf="currentUser">
         <img src="assets/Profil.jpg" alt="User Image">
         <p> {{ currentUser.email }}</p>
-        <button>Update</button>
+        <button (click)="toggleEdit()">{{ isEditing ? 'Update' : 'Edit Profile' }}</button>
       </div>
       <div class="divider"></div> <!-- Divider added here -->
       <!-- Personal Information Section -->
@@ -18,6 +18,7 @@
               <input 
                 type="text" 
                 [(ngModel)]="currentUser.firstName" 
+                [disabled]="!isEditing" 
                 placeholder="Enter First Name"
               >
             </p>
@@ -27,6 +28,7 @@
               <input 
                 type="text" 
                 [(ngModel)]="currentUser.lastName" 
+                [disabled]="!isEditing" 
                 placeholder="Enter Last Name"
               >
             </p>
@@ -47,15 +49,15 @@
         <button class="close-btn" (click)="closePopup()">X</button> <!-- Close button -->
         <h2>Organize New Social Event</h2>
         <div class="divider"></div> <!-- Divider added here -->
-        <form class="event-form">
+        <form class="event-form" #eventForm="ngForm" (ngSubmit)="onCreateEvent(eventForm)">
           <div class="column1"> 
             <div class="field-group">
               <label for="event-name">Event Name:</label>
-              <input type="text" id="event-name" placeholder="Enter Event Name">
+              <input type="text" id="event-name" [(ngModel)]="newEvent.name" name="name" placeholder="Enter Event Name" required>
             </div>
             <div class="field-group">
               <label for="event-description">Description:</label>
-              <textarea id="event-description" placeholder="Enter Description"></textarea>
+              <textarea id="event-description" [(ngModel)]="newEvent.description" name="description" placeholder="Enter Description" required></textarea>
             </div>
           </div>
           <div class="column2">
@@ -65,11 +67,11 @@
             </div>
             <div class="field-group">
               <label for="event-date">Choose Date:</label>
-              <input type="date" id="event-date">
+              <input type="date" id="event-date" [(ngModel)]="newEvent.date" name="date" required>
             </div>
             <div class="field-group">
               <label for="event-time">Choose Time:</label>
-              <select id="event-time">
+              <select id="event-time" [(ngModel)]="eventTime" name="eventTime">
                 <option>Select</option>
                 <option value="20:15">20:15</option>
                 <option value="20:30">20:30</option>
@@ -79,7 +81,7 @@
               </select>
             </div>
           </div>
-          <button type="submit" class="submit-btn">Submit</button>
+          <button type="submit" class="submit-btn" >Submit</button>
         </form>
       </div>
     </div>

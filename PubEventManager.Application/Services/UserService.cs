@@ -73,5 +73,19 @@ namespace PubEventManager.Application.Services
                 UserType = (int)user.Type,
             };
         }
+        public async Task<bool> UpdateUserAsync(int id, RegisterUserDto updatedUserDto)
+        {
+            var user = await _userRepository.GetByIdAsync(id);
+            if (user == null) return false;
+
+            user.FirstName = updatedUserDto.FirstName;
+            user.LastName = updatedUserDto.LastName;
+            user.Email = updatedUserDto.Email;
+            user.Password = updatedUserDto.Password;
+            user.Type = (UserType)updatedUserDto.UserType;
+
+            await _userRepository.UpdateAsync(user);
+            return true;
+        }
     }
 }
