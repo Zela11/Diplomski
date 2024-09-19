@@ -3,7 +3,7 @@
     <div class="profile">
       <!-- User Image Section -->
       <div class="user-image" *ngIf="currentUser">
-        <img src="https://via.placeholder.com/150" alt="User Image">
+        <img src="assets/Profil.jpg" alt="User Image">
         <p> {{ currentUser.email }}</p>
         <button>Update</button>
       </div>
@@ -44,72 +44,84 @@
     <!-- Popup Section -->
     <div class="popup" *ngIf="showPopup">
       <div class="popup-content">
+        <button class="close-btn" (click)="closePopup()">X</button> <!-- Close button -->
         <h2>Organize New Social Event</h2>
-        <form>
-          <div class="field-group">
-            <label for="event-name">Event Name:</label>
-            <input type="text" id="event-name" placeholder="Enter Event Name">
+        <div class="divider"></div> <!-- Divider added here -->
+        <form class="event-form">
+          <div class="column1"> 
+            <div class="field-group">
+              <label for="event-name">Event Name:</label>
+              <input type="text" id="event-name" placeholder="Enter Event Name">
+            </div>
+            <div class="field-group">
+              <label for="event-description">Description:</label>
+              <textarea id="event-description" placeholder="Enter Description"></textarea>
+            </div>
           </div>
-          <div class="field-group">
-            <label for="event-description">Description:</label>
-            <textarea id="event-description" placeholder="Enter Description"></textarea>
+          <div class="column2">
+            <div class="field-group">
+              <label for="event-image">Choose Image:</label>
+              <input type="file" id="event-image">
+            </div>
+            <div class="field-group">
+              <label for="event-date">Choose Date:</label>
+              <input type="date" id="event-date">
+            </div>
+            <div class="field-group">
+              <label for="event-time">Choose Time:</label>
+              <select id="event-time">
+                <option>Select</option>
+                <option value="20:15">20:15</option>
+                <option value="20:30">20:30</option>
+                <option value="20:45">20:45</option>
+                <option value="21:00">21:00</option>
+                <!-- Add more time slots as needed -->
+              </select>
+            </div>
           </div>
-          <div class="field-group">
-            <label for="event-image">Choose Image:</label>
-            <input type="file" id="event-image">
-          </div>
-          <div class="field-group">
-            <label for="event-date">Choose Date:</label>
-            <input type="date" id="event-date">
-          </div>
-          <div class="field-group">
-            <label for="event-time">Choose Time:</label>
-            <select id="event-time">
-              <option value="20:15">20:15</option>
-              <option value="20:30">20:30</option>
-              <option value="20:45">20:45</option>
-              <option value="21:00">21:00</option>
-              <!-- Add more time slots as needed -->
-            </select>
-          </div>
-          <button type="submit">Submit</button>
-          <button type="button" (click)="closePopup()">Close</button>
+          <button type="submit" class="submit-btn">Submit</button>
         </form>
       </div>
     </div>
+
     <div class="popup" *ngIf="showSecondPopup">
       <div class="popup-content">
+        <button class="close-btn" (click)="closeSecondPopup()">X</button> <!-- Close button -->
         <h2>Register New Employee</h2>
-        <form (ngSubmit)="onRegisterEmployee(employeeForm)" #employeeForm="ngForm">
-          <div class="field-group">
-            <label for="first-name">First Name:</label>
-            <input type="text" id="first-name" [(ngModel)]="newEmployee.firstName" name="firstName" placeholder="Enter First Name" required>
+        <div class="divider"></div> <!-- Divider added here -->
+        <form class="employee-form" (ngSubmit)="onRegisterEmployee(employeeForm)" #employeeForm="ngForm">
+          <div class="column1">
+            <div class="field-group">
+              <label for="first-name">First Name:</label>
+              <input type="text" id="first-name" [(ngModel)]="newEmployee.firstName" name="firstName" placeholder="Enter First Name" required>
+            </div>
+            <div class="field-group">
+              <label for="last-name">Last Name:</label>
+              <input type="text" id="last-name" [(ngModel)]="newEmployee.lastName" name="lastName" placeholder="Enter Last Name" required>
+            </div>
+            <div class="field-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" [(ngModel)]="newEmployee.email" name="email" placeholder="Enter Email" required>
+            </div>
           </div>
-          <div class="field-group">
-            <label for="last-name">Last Name:</label>
-            <input type="text" id="last-name" [(ngModel)]="newEmployee.lastName" name="lastName" placeholder="Enter Last Name" required>
+          <div class="column2">
+            <div class="field-group">
+              <label for="position">Position:</label>
+              <select id="position" [(ngModel)]="newEmployee.userType" name="userType" required>
+                <option value="2">Server</option>
+                <option value="3">Bartender</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="password">Password:</label>
+              <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter Password" required>
+            </div>
+            <div class="field-group">
+              <label for="confirm-password">Confirm Password:</label>
+              <input type="password" id="confirm-password" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+            </div>
           </div>
-          <div class="field-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" [(ngModel)]="newEmployee.email" name="email" placeholder="Enter Email" required>
-          </div>
-          <div class="field-group">
-            <label for="position">Position:</label>
-            <select id="position" [(ngModel)]="newEmployee.userType" name="userType" required>
-              <option value="2">Server</option>
-              <option value="3">Bartender</option>
-            </select>
-          </div>
-          <div class="field-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter Password" required>
-          </div>
-          <div class="field-group">
-            <label for="confirm-password">Confirm Password:</label>
-            <input type="password" id="confirm-password" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
-          </div>
-          <button type="submit">Register</button>
-          <button type="button" (click)="closeSecondPopup()">Close</button>
+          <button type="submit" class="submit-btn">Register</button>
         </form>
       </div>
     </div>

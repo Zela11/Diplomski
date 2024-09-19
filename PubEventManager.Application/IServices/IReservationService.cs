@@ -1,4 +1,5 @@
 ﻿using PubEventManager.Application.Dtos;
+using PubEventManager.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace PubEventManager.Application.IServices
 {
     public interface IReservationService
     {
-        Task<bool> CreateReservation(ReservationDto reservationDto);
+        Task<Reservation> CreateReservation(ReservationDto reservationDto);
         Task<IEnumerable<ReservationDto>> GetReservationsByEventId(int eventId); // Dodata metoda
 
     }

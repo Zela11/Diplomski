@@ -12,45 +12,56 @@
   background-color: transparent;
   margin-bottom: 30px;
 }
+
 .event-details-content {
-  margin-top: 150px;
   padding: 50px;
   background: rgba(0, 0, 0, 0.9); /* Tamna pozadina */
   border: black solid 5px;
   border-radius: 8px;
-  max-width: 800px;
+  max-width: 1200px;
   text-align: center;
 }
-
-/* Heading for event name */
-h2 {
-  font-size: 1.8rem;
-  color: #ff9800;
-  margin-bottom: 20px;
+.event-details-content h2 {
+  color: #ff5e00;
 }
-
-/* Paragraph styling */
-p {
-  font-size: 1.2rem;
-  color: #ffffff;
-  margin-bottom: 10px;
-}
-
-/* Reserve table button styling */
-.reserve-table-button {
-  margin-top: 20px;
-  padding: 12px 25px;
-  background-color: #ff9800;
+.event-details-content p {
   color: white;
+}
+.divider {
+  margin: 20px 0;
   border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
+  border-top: 2px solid #ff5e00; /* Beli divider */
+}
+.divider2 {
+  margin-top: -10px;
+  margin-bottom: 25px;
+  border: none;
+  border-top: 2px solid #ff5e00; /* Beli divider */
 }
 
-.reserve-table-button:hover {
-  background-color: #e68900;
+.columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Razmak između kolona */
+}
+
+.event-info, .slider {
+  flex: 1;
+  color: white;
+}
+.event-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Rasporedi elemente ravnomerno vertikalno */
+  align-items: center; /* Centriraj elemente horizontalno */
+  height: auto; /* Podesi da zauzima sav raspoloživi prostor u koloni */
+  padding: 20px;
+  font-size: 1.5rem; /* Povećaj font */
+}
+
+.event-info p, 
+.event-info button {
+  margin: 10px 0; /* Dodaj malo margine između elemenata */
 }
 
 /* Overlay for popup */
@@ -81,13 +92,15 @@ p {
   width: 90%;
   max-width: 900px; /* Increased width to accommodate fixed image size */
   background-color: white;
-  border: 5px solid #ff9800;
   border-radius: 10px;
   padding: 20px;
   display: flex;
   flex-direction: row;
   gap: 40px; /* Razmak između slika i informacija */
   box-sizing: border-box;
+  background: #090909; /* Dark background */
+  box-shadow: 0 0px 15px rgba(255, 94, 0, 0.6); /* Senka sa bojom #ff5e00 */
+
 }
 
 /* Close button styling */
@@ -122,10 +135,11 @@ p {
   flex: 0 1 auto; /* Automatically adjust size based on content */
   width: 550px; /* Fixed width */
   height: 458px; /* Fixed height */
-  border: 3px solid #000000;
+  box-shadow: 0 0px 25px rgba(0, 0, 0, 0.6); /* Senka sa bojom #ff5e00 */
   border-radius: 11px;
   overflow: hidden;
   box-sizing: border-box;
+  border: 2px solid black;
 }
 
 /* Popup image styling */
@@ -151,22 +165,24 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  color: #ffffff; /* Bele boje za tekst */
+  color: #000000; /* Bele boje za tekst */
 }
 
 /* Heading in info container */
 .info-container h3 {
+  margin-top: 30px;
   font-size: 1.8rem;
-  color: #ff9800;
-  margin-bottom: 20px;
+  color: #cccccc;
+  margin-bottom: 25px;
   text-align: center;
+  
 }
 
 /* Paragraph styling in info container */
 .info-container p {
   font-size: 1.1rem;
   color: #cccccc;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 /* Box colors for table status */
@@ -200,7 +216,7 @@ p {
 .popup-reserve-button {
   margin-top: 20px;
   padding: 15px 30px;
-  background-color: #ff9800;
+  background-color: #ff5e00;
   color: white;
   border: none;
   cursor: pointer;
@@ -317,4 +333,16 @@ p {
 
 #radio4:checked ~ .navigation-auto .auto-btn4 {
   background: #ff5e00;
+}
+
+.reserve-table-button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  background-color: #ff5e00;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }

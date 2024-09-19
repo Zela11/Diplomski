@@ -17,13 +17,13 @@ namespace PubEventManager.Application.Services
         {
             _reservationRepository = reservationRepository;
         }
-        public async Task<bool> CreateReservation(ReservationDto reservationDto)
+        public async Task<Reservation> CreateReservation(ReservationDto reservationDto)
         {
             var existingReservation = await _reservationRepository.GetReservationByGuestAndEventAsync(reservationDto.GuestId, reservationDto.EventId);
             
             if(existingReservation != null)
             {
-                return false;
+                return null;
             }
             
             var res = new Reservation
@@ -34,7 +34,7 @@ namespace PubEventManager.Application.Services
                 ArrivalTime = reservationDto.ArrivalTime,
             };
             await _reservationRepository.AddAsync(res);
-            return true;
+            return res;
         }
 
         public async Task<IEnumerable<ReservationDto>> GetReservationsByEventId(int eventId)

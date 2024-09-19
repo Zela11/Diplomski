@@ -10,9 +10,11 @@ namespace PubEventManager.Api.Controllers;
 public class ReservationController : ControllerBase
 {
     private readonly IReservationService _reservationService;
-    public ReservationController(IReservationService reservationService)
+    private readonly IEmailService _emailService;
+    public ReservationController(IReservationService reservationService, IEmailService emailService)
     {
         _reservationService = reservationService;
+        _emailService = emailService;
     }
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] ReservationDto reservationDto)
@@ -23,12 +25,12 @@ public class ReservationController : ControllerBase
         }
 
         var result = await _reservationService.CreateReservation(reservationDto);
-        if (!result)
+        if (result == null)
         {
             return BadRequest("Adding failed.");
         }
 
-        //await _emailService.SendReservationConfirmationEmail(reservationDto.GuestId);
+        await _emailService.SendReservationConfirmationEmail(result);
 
 
         return Ok(new { message = "Reservation created successfully." });
