@@ -34,7 +34,7 @@ import { FooterComponent } from './layout/footer/footer.component';  // Dodaj ov
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

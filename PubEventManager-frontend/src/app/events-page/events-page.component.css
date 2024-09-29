@@ -15,13 +15,16 @@
 }
 
 .events-container {
-  padding: 30px;
+  padding-top: 15px;
+  padding-right: 30px;
+  padding-left: 30px;
   background: rgba(0, 0, 0, 0.9);
   border: 5px solid black;
   border-radius: 8px;
   width: 100%;
   max-width: 1350px;
   text-align: center;
+  height: 550px;
 }
 
 .events-header {
@@ -125,4 +128,171 @@
 .arrow-button i {
   font-size: 1.5rem;
 }
+/**/
+/* Week Range Styles */
+.week-range {
+  margin-top: 10px;
+  cursor: pointer;
+  padding: 10px;
+  border: 2px solid #ff5e00; /* Match the theme color */
+  border-radius: 25px; /* Rounded border */
+  transition: background 0.3s ease, transform 0.3s ease;
+}
 
+.week-range:hover {
+  background: rgba(255, 94, 0, 0.2); /* Light orange background on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Popup Styles */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff; /* White background for the popup */
+  border: 2px solid #ff5e00; /* Border color */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  padding: 20px;
+  z-index: 1000; /* Ensure it appears on top */
+  animation: fadeIn 0.7s; /* Animation effect */
+  
+}
+/* Overlay for dimming the background */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+  z-index: 999; /* Below the popup */
+  animation: fadeIn 0.5s ease;
+}
+
+/* Popup Styles */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  width: 100%;
+  max-width: 400px; /* Limit max width for better focus */
+  z-index: 1000;
+  animation: popupFadeIn 0.5s ease;
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Close Button */
+.close-popup {
+  position: absolute;
+  top: -25px;
+  right: -10px;
+  background: none;
+  border: none;
+  color: #ff5e00;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-popup:hover {
+  color: #e64a19; /* Darker on hover */
+}
+
+/* Popup Heading */
+.popup h2 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+/* Popup Paragraph */
+.popup p {
+  font-size: 1rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.4; /* Better readability */
+}
+
+/* Date Picker */
+.date-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.date-picker label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #ff5e00;
+}
+
+.date-picker input[type="date"] {
+  appearance: none;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #ff5e00;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  color: #333;
+  width: 100%;
+  max-width: 300px; /* Max width for better design */
+  transition: border-color 0.3s ease;
+}
+
+.date-picker input[type="date"]:focus {
+  border-color: #4CAF50;
+}
+
+/* Confirm Button */
+.confirm-button {
+  padding: 12px 20px;
+  background-color: #ff5e00;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-button:hover {
+  background-color: #e64a19; /* Darker on hover */
+}
+
+/* Animations */
+@keyframes popupFadeIn {
+  from {
+    transform: translate(-50%, -60%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

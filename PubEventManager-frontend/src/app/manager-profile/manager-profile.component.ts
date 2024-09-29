@@ -103,7 +103,6 @@ export class ManagerProfileComponent implements OnInit {
       const formattedDate = this.getFormattedDateForBackend(this.newEvent.date);
       this.newEvent.date = new Date(formattedDate);
 
-          // Kreiranje FormData objekta
     const formData = new FormData();
     formData.append('name', this.newEvent.name);
     formData.append('description', this.newEvent.description);
@@ -115,11 +114,10 @@ export class ManagerProfileComponent implements OnInit {
       formData.append('image', this.newEvent.image); // Pretpostavljam da je slika sačuvana u `newEvent.image`
     }
 
-      console.log(this.newEvent);
-      console.log("Pre poziva eventService");
       this.eventService.createEvent(formData).subscribe(
         (response) => {
           console.log("Successfully created new event", response);
+          this.closePopup();
           form.reset();
         },
         (error: HttpErrorResponse) => {

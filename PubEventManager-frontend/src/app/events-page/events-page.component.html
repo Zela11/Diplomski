@@ -2,7 +2,24 @@
   <div class="events-container">
     <div class="events-header">
       <h1 class="title">Events</h1>
+      <div class="week-range" (click)="openPopup()">
+        {{ weekRange }}
+      </div>
     </div>
+    <div class="overlay" *ngIf="isPopupVisible"></div>
+
+    <div class="popup" *ngIf="isPopupVisible">
+      <div class="popup-content">
+        <button class="close-popup" (click)="closePopup()">×</button>
+        <h2>Select a week</h2>
+        <p>Please select the week for which you want to see the upcoming events.</p>
+        <div class="date-picker">
+          <input type="date" id="weekPicker" (change)="onDateChange($event)">
+        </div>
+      </div>
+    </div>
+    
+    
     <div class="divider"></div>
     <div class="events-wrapper">
       <button class="arrow-button prev" (click)="prevPage()" [disabled]="currentPage === 0">

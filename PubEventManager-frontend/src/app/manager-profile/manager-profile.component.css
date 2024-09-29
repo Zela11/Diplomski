@@ -194,20 +194,19 @@
 }
 
 .close-btn {
-  background: #ff5e00; /* Orange close button */
-  color: white;
+  background: none;
   border: none;
-  border-radius: 50%;
-  padding: 5px 10px;
-  font-size: 1rem;
+  font-size: 24px;
   cursor: pointer;
+  color: #ff9800;
+  transition: color 0.3s ease;
   position: absolute;
   top: 10px;
   right: 10px;
 }
 
 .close-btn:hover {
-  background: #e65500; /* Darker shade on hover */
+  color: #e68900;
 }
 
 .event-form, .employee-form {

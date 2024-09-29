@@ -18,7 +18,9 @@
 .event-details-content {
   margin-top: 20px;
   padding: 15px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
   background: rgba(0, 0, 0, 0.9);
   border: black solid 5px;
   border-radius: 8px;
@@ -72,6 +74,7 @@
 }
 
 .image-container1 {
+  margin-top: 15px;
   flex: 1;
   overflow: hidden;
   border-radius: 10px;
@@ -119,9 +122,12 @@
   box-sizing: border-box;
   background: #090909; /* Dark background */
   box-shadow: 0 0px 15px rgba(255, 94, 0, 0.6); /* Senka sa bojom #ff5e00 */
-
+  transform: translateY(-45px); /* Start slightly above */
+  transition: transform 0.5s ease-in-out; /* Animation for the content */
 }
-
+.popup-overlay.show .popup-content {
+  transform: translateY(0); /* Move to original position */
+}
 /* Close button styling */
 .close-button {
   position: absolute;
@@ -233,7 +239,7 @@
 
 /* Reserve button styling in popup */
 .popup-reserve-button {
-  margin-top: 20px;
+  margin-top: 40px;
   padding: 15px 30px;
   background-color: #ff5e00;
   color: white;

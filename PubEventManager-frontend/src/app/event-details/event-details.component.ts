@@ -33,7 +33,7 @@ export class EventDetailsComponent implements OnInit {
     { id: 5, shape: 'circle', coords: '56,391,17' },
     { id: 6, shape: 'circle', coords: '399,343,17' },
     { id: 7, shape: 'circle', coords: '478,391,17' },
-    { id: 8, shape: 'rect', coords: '59,209,63,32' },
+    { id: 8, shape: 'rect', coords: '265,345,32,63' },
     /*
     { id: 9, shape: 'rect', coords: '161,344,32,63' },
     { id: 10, shape: 'rect', coords: '265,344,32,63' },
@@ -146,7 +146,7 @@ export class EventDetailsComponent implements OnInit {
           this.closeModal();
         },
         error: (error) => {
-          alert('Reservation failed: ' + error.message);
+          alert('You have already made a reservation for this event!' );
         }
       });
     }
