@@ -8,6 +8,9 @@ import { environment } from 'src/env/enviroment';
   providedIn: 'root'
 })
 export class EventService {
+
+  private selectedEvent: EventModel | null = null;
+
   private apiUrl = `${environment.apiUrl}/events`; // API URL
 
   constructor(private http: HttpClient) { }
@@ -24,5 +27,12 @@ export class EventService {
   generateEventReport(eventId: number) {
     const url = `${this.apiUrl}/${eventId}/report`;
     return this.http.get(url, { responseType: 'blob' });  // Vrati PDF kao blob
+  }
+  setEvent(event: EventModel): void {
+    this.selectedEvent = event;
+  }
+
+  getEvent(): EventModel | null {
+    return this.selectedEvent;
   }
 }

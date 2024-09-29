@@ -49,7 +49,7 @@
         <button class="close-btn" (click)="closePopup()">X</button> <!-- Close button -->
         <h2>Organize New Social Event</h2>
         <div class="divider"></div> <!-- Divider added here -->
-        <form class="event-form" #eventForm="ngForm" (ngSubmit)="onCreateEvent(eventForm)">
+        <form class="event-form" #eventForm="ngForm" (ngSubmit)="onCreateEvent(eventForm)" autocomplete="off" >
           <div class="column1"> 
             <div class="field-group">
               <label for="event-name">Event Name:</label>

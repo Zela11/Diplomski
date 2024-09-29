@@ -1,21 +1,40 @@
-<div class="event-details-container">
-  <div class="event-details-content">
-    <h2>{{ event?.name }}</h2>
-    <p>{{ formatDateTime(event?.date) }}</p>
-    <hr class="divider" />
-    <div class="columns">
-      <div class="event-info">
-        <p>{{ event?.description }}</p>
-        <button *ngIf="userType === 0" class="reserve-table-button" (click)="toggleReservation()">Choose Table</button>
-        <button *ngIf="userType !== 0" class="generate-pdf-button" (click)="generatePdf()">Generate PDF</button>
-      </div>
-      <div class="image-container1">
-        <img *ngIf="event?.imageSrc" [src]="event?.imageSrc" alt="Event Image" class="event-image">
+<div *ngIf="event; else loading">
+  <div class="event-details-container">
+    <div class="event-details-content">
+      <h2>{{ event.name }}</h2>
+      <p>{{ formatDateTime(event.date) }}</p>
+      <hr class="divider" />
+      <div class="columns">
+        <div class="event-info">
+          <p>{{ event.description }}</p>
+          <button *ngIf="userType === 0" class="reserve-table-button" (click)="toggleReservation()">Choose Table</button>
+          <button *ngIf="userType !== 0" class="generate-pdf-button" (click)="generatePdf()">Generate PDF</button>
+        </div>
+        <div class="image-container1">
+          <img *ngIf="event.imageSrc" [src]="event.imageSrc" alt="Event Image" class="event-image">
+        </div>
       </div>
     </div>
   </div>
 </div>
-
+<ng-template #loading>
+  <div class="event-details-container">
+    <div class="event-details-content">
+      <h2> Loading event name </h2>
+      <p> Loading event date </p>
+      <hr class="divider" />
+      <div class="columns">
+        <div class="event-info">
+          <p> Loading event description </p>
+          <button class="reserve-table-button" (click)="toggleReservation()">Button</button>
+        </div>
+        <div class="image-container1">
+          <img src="assets/HIMYM.webp" alt="Event Image" class="event-image"> <!-- Placeholder image -->
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
 <div class="popup-overlay" [ngClass]="{'show': isReservationOpen}">
   <div class="popup-content">
     <button class="close-button" (click)="toggleReservation()">×</button>

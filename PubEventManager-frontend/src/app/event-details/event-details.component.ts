@@ -8,6 +8,7 @@ import { ReservationService } from '../services/reservation/reservation.service'
 import { UserService } from '../services/user/user.service';
 import { User } from '../shared/model/user';
 import { saveAs } from 'file-saver'
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-event-details',
@@ -17,7 +18,7 @@ import { saveAs } from 'file-saver'
 export class EventDetailsComponent implements OnInit {
   currentUser: User | null = null;
   public userType: number = 0; // Pretpostavka za default userType, zameni stvarnim izvorom
-  public event: EventModel | undefined;
+  public event: EventModel | null = null;
   isReservationOpen: boolean = false;
   selectedTableId: number | null = null;
   highlightedArea: number | null = null;
@@ -54,21 +55,33 @@ export class EventDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadEventDetails();
-    this.loadUser();
+    //this.loadUser();
+    if (this.tokenStorage.getUserId() == 14) {
+      this.userType = 0;
+    } else {
+      this.userType = 1;
+    }
+    this.event = this.eventService.getEvent();  // Преузми објекат из сервиса
+    console.log("Novi event: ", this.event);
+    if (this.event?.date && typeof this.event?.date === 'string') {
+      this.event.date = new Date(this.event.date);
+    }
+    
+    if(this.event?.id)
+      this.loadReservations(this.event?.id);
+    
   }
   loadUser() {
     const userId = this.tokenStorage.getUserId();
     this.userService.getById(userId).subscribe(user => {
       this.currentUser = user;
-      console.log(this.currentUser);
-      this.userType = this.currentUser?.userType;
+      this.userType = user.userType;
     });
 
   }
   generatePdf(): void {
-    if (this.eventId) {
-      this.eventService.generateEventReport(this.eventId).subscribe({
+    if (this.event?.id) {
+      this.eventService.generateEventReport(this.event.id).subscribe({
         next: (response) => {
           const blob = new Blob([response], { type: 'application/pdf' });
           saveAs(blob, 'EventReport.pdf');  // Sačuvaj fajl lokalno
@@ -89,9 +102,7 @@ export class EventDetailsComponent implements OnInit {
           event.date = new Date(event.date);
         }
         this.event = event;
-        console.log(this.event);
-        console.log(this.formatDateTime(event.date));
-        this.loadReservations(eventId);
+        //this.loadReservations(eventId);
       });
     }
   }
@@ -118,8 +129,7 @@ export class EventDetailsComponent implements OnInit {
   }
 
   public reserveTable(): void {
-    console.log(this.selectedTableId);
-    console.log(this.event);
+    this.eventId = this.event?.id;
 
     if (this.selectedTableId && this.eventId) {
       const reservation: Reservation = {
@@ -131,6 +141,8 @@ export class EventDetailsComponent implements OnInit {
         next: (response) => {
           alert('Reservation confirmed!');
           this.loadEventDetails();
+          if(this.eventId)
+            this.loadReservations(this.eventId);
           this.closeModal();
         },
         error: (error) => {

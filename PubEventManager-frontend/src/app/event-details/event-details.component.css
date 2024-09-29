@@ -76,7 +76,6 @@
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 0px 15px rgba(255, 94, 0, 0.6);
-
 }
 
 .event-image {
@@ -269,4 +268,15 @@
   border-radius: 5px;
   font-size: 16px;
   transition: background-color 0.3s ease;
+}
+
+.image-placeholder {
+  width: 100%; /* Prilagodi širinu prema potrebama */
+  height: 200px; /* Prilagodi visinu prema potrebama */
+  background-color: #e0e0e0; /* Svetlo siva boja */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px; /* Opcionalno, za tekst unutar placeholdera */
+  color: #888; /* Opcionalno, boja teksta */
 }

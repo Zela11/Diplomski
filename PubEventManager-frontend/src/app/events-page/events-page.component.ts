@@ -46,6 +46,7 @@ export class EventsPageComponent implements OnInit {
  
 
   navigateToEvent(event: EventModel): void {
-    this.router.navigate(['/event-details', event.id]);
+    this.eventService.setEvent(event);  // Сачувај објекат у сервис
+    this.router.navigate(['/event-details']);
   }
 }
